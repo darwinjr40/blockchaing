@@ -18,7 +18,7 @@ export class DevicesController {
     return this.devicesService.findAll(paginationDto);
   }
 
-  @Get('hola')
+  @Get('datos')
   findAl() {
     const fechaInicial = new Date();
     const fechaActual = new Date();
@@ -26,7 +26,7 @@ export class DevicesController {
     fechaActual.setHours(23, 59, 59, 999);
     return this.devicesService.findDevicesByIdBetweenDates(fechaInicial, fechaActual);
   }
-  
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.devicesService.findOne(+id);
