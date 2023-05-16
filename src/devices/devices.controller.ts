@@ -24,7 +24,7 @@ export class DevicesController {
     const fechaActual = new Date();
     fechaInicial.setHours(0, 0, 0, 0);
     fechaActual.setHours(23, 59, 59, 999);
-    return this.devicesService.findDevicesByIdBetweenDates(fechaInicial, fechaActual);
+    return this.devicesService.findDevicesBetweenDates(fechaInicial, fechaActual);
   }
 
   @Get(':id')

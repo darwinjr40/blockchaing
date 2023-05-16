@@ -86,7 +86,7 @@ export class DevicesService {
     return queryBuilder.getMany();
   }
 
-  public async findDevicesByIdBetweenDates(    
+  public async findAllDevicesByIdBetweenDates(    
     startDate: Date,
     endDate: Date,
   ) {
@@ -95,6 +95,21 @@ export class DevicesService {
     return resp.getMany();
   }
 
+  public async findDevicesBetweenDates(    
+    startDate: Date,
+    endDate: Date,
+  ) {
+    const queryBuilder = this.deviceRepository.createQueryBuilder()
+    let resp = await queryBuilder
+      .where('time BETWEEN :startDate AND :endDate', { 
+        startDate, endDate
+      }).getOne();
+    let resultado = {"Data": ""};
+    if (resp) {
+      resultado = {"Data": `${resp.id}, ${resp.temp}, ${resp.hum}, ${resp.hum}, ${resp.time.toISOString()}`}
+    }
+    return resultado;
+  }
 
 
 }
