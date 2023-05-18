@@ -100,13 +100,22 @@ export class DevicesService {
     endDate: Date,
   ) {
     const queryBuilder = this.deviceRepository.createQueryBuilder()
+    let estado = false;
     let resp = await queryBuilder
-      .where('time BETWEEN :startDate AND :endDate', { 
-        startDate, endDate
+      .where('state =:estado AND time BETWEEN :startDate AND :endDate', { 
+        startDate,
+        endDate, 
+        estado,
       }).getOne();
     let resultado = {"Data": ""};
-    if (resp) {
-      resultado = {"Data": `${resp.id}, ${resp.temp}, ${resp.hum}, ${resp.hum}, ${resp.time.toISOString()}`}
+    if (resp) {      
+      resultado = {"Data": `${resp.id}, ${resp.temp}, ${resp.hum}, ${resp.humo}, ${resp.time.toISOString()}`}
+      let device = await this.deviceRepository.findOneBy({ id:resp.id});
+      if (device){
+      // throw new NotFoundException(`Device with ${ id } not found`);
+        device.state = true;
+        await  this.deviceRepository.save(device);
+      }  
     }
     return resultado;
   }

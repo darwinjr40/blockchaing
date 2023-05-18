@@ -28,5 +28,10 @@ export class Device {
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     time: Date;
+
+    @Column('boolean', {
+        default: false
+    })
+    state: boolean;
     
 }

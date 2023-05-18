@@ -1,4 +1,4 @@
-import { IsArray, IsIn, IsInt, IsNumber, IsOptional, 
+import { IsArray, IsIn, IsInt, IsNumber, IsOptional,IsBoolean,
     IsPositive, IsString, MinLength 
 } from 'class-validator';
 
@@ -20,5 +20,8 @@ export class CreateDeviceDto {
     @IsOptional()
     fecha?: string;
 
+    @IsBoolean()
+    @IsOptional()
+    state?: boolean;
 
 }
